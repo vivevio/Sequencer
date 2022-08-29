@@ -1,5 +1,3 @@
-'use strict';
-
 const hasTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
 
 var context = { hasTouch };
@@ -221,7 +219,7 @@ class S{
 	drawImage(id) {
 		if (id === undefined) id = this.current;
 		if (id < 0 || id >= this.images.length) return
-		const r = this.config.hiDPI ? window.devicePixelRatio : 1;
+		const r = 1; // disable hidpi support
 		const cw = this.ctx.canvas.width / r;
 		const ch = this.ctx.canvas.height / r;
 		const ca = cw / ch;
@@ -262,7 +260,7 @@ class S{
 	}
 
 	size(w, h) {
-		const r = this.config.hiDPI ? window.devicePixelRatio : 1;
+		const r = 1;
 		const c = this.ctx.canvas;
 		c.width = w * r;
 		c.height = h * r;
@@ -382,7 +380,7 @@ function constrain(v, a, b){
 function absoluteMove(self, e) {
 
 	const t = self.images.length;
-	const r = self.config.hiDPI ? window.devicePixelRatio : 1;
+	const r = 1;
 
 	let ox, oy;
 	if (e.touches) {
@@ -462,4 +460,4 @@ var sequencer = {
 	instances
 };
 
-module.exports = sequencer;
+export { sequencer as default };
