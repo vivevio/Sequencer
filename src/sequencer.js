@@ -9,11 +9,19 @@
  */
 
 const instances = [];
+const _window = null;
+const context = {
+	hasTouch: false
+}
 
-import context from "./context.js"
 import {parse} from "./parser.js"
 
-function make(cfg) {
+
+function make(cfg, srcWindow) {
+
+	_window = srcWindow;
+	context.hasTouch = 'ontouchstart' in srcWindow || navigator.msMaxTouchPoints;
+
 	const s = new S(cfg)
 	if (s !== false) instances.push(s)
 	return s

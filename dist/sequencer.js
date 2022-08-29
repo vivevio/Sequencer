@@ -1,7 +1,3 @@
-const hasTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
-
-var context = { hasTouch };
-
 // Returns an array of strings parsed from two filenames like
 // first : DSC00998.jpg
 // last  : DSC01112.jpg
@@ -101,8 +97,14 @@ function warn(msg) {
  */
 
 const instances = [];
+const context = {
+	hasTouch: false
+};
 
-function make(cfg) {
+
+function make(cfg, srcWindow) {
+	context.hasTouch = 'ontouchstart' in srcWindow || navigator.msMaxTouchPoints;
+
 	const s = new S(cfg);
 	if (s !== false) instances.push(s);
 	return s
