@@ -9,7 +9,7 @@
  */
 
 const instances = [];
-const _window = null;
+var _window = null;
 const context = {
 	hasTouch: false
 }
@@ -99,7 +99,13 @@ class S{
 		const _up   = context.hasTouch ? 'touchend'   : 'mouseup'
 
 		if (this.config.playMode === 'hover') {
-			this.ctx.canvas.addEventListener(_move, absoluteMove.bind(null, this))
+
+			if(this.config.hoverElement) {
+				this.config.hoverElement.addEventListener(_move, absoluteMove.bind(null, this))
+			} else {
+				this.ctx.canvas.addEventListener(_move, absoluteMove.bind(null, this))
+			}
+			
 		} else if (this.config.playMode === 'drag') {
 			this.ctx.canvas.addEventListener(_move, relativeMove.bind(null, this))
 			this.ctx.canvas.addEventListener(_down, pointerDown.bind(null, this))
@@ -138,7 +144,7 @@ class S{
 	drawImage(id) {
 		if (id === undefined) id = this.current
 		if (id < 0 || id >= this.images.length) return
-		const r = 1 // disable hidpi support
+		const r = this.config.hiDPI ? _window.devicePixelRatio : 1;
 		const cw = this.ctx.canvas.width / r
 		const ch = this.ctx.canvas.height / r
 		const ca = cw / ch
@@ -179,7 +185,7 @@ class S{
 	}
 
 	size(w, h) {
-		const r = 1
+		const r = this.config.hiDPI ? _window.devicePixelRatio : 1
 		const c = this.ctx.canvas
 		c.width = w * r
 		c.height = h * r
@@ -299,7 +305,7 @@ function constrain(v, a, b){
 function absoluteMove(self, e) {
 
 	const t = self.images.length
-	const r = 1
+	const r = self.config.hiDPI ? _window.devicePixelRatio : 1
 
 	let ox, oy
 	if (e.touches) {

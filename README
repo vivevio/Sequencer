@@ -80,8 +80,10 @@ How to use:
                                         // to trigger nextImage(),
                                         // can be < 1, but must be > 0
         hiDPI            : true,        // Use hiDPI if present
-        imageLoad        : function     // Callback for each image load
+        hoverElement     : null,        // Dom element. if specified, hover will based on this element
+        imageLoad        : function,    // Callback for each image load
         queueComplete    : function     // Callback for queue complete
+
     };
 
 --------------------------------------------------------------------------------

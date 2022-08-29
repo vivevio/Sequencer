@@ -35,7 +35,7 @@
 			}
 		</style>
 	</head>
-	<body></body>
+	<body id="body"></body>
 	<script type='module'>
 
 		import Sequencer from '../dist/sequencer.js';
@@ -69,6 +69,7 @@
 			to               : 'pics/pig/DSC04775.JPG',
 			playMode         : 'hover',
 			direction        : '-x',
+			hoverElement	 : document.getElementById('body')
 		});
 
 		configs.push({
@@ -193,7 +194,7 @@
 			tr.appendChild(td2);
 			t.appendChild(tr);
 
-			const s = Sequencer.make(cfg);
+			const s = Sequencer.make(cfg, window);
 
 		});
 
