@@ -1,3 +1,5 @@
+'use strict';
+
 const hasTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
 
 var context = { hasTouch };
@@ -460,4 +462,4 @@ var sequencer = {
 	instances
 };
 
-export { sequencer as default };
+module.exports = sequencer;
