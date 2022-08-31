@@ -1,6 +1,6 @@
 {
   "name": "image-sequencer",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Sequencer - A fast(?) fullscreen image-sequence player",
   "main": "src/sequencer.js",
   "author": "Andreas Gysin",

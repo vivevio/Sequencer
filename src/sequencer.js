@@ -47,6 +47,8 @@ class S{
 			dragAmount       : 10,
 			hiDPI            : true,    // use hiDPI canvas
 			smoothing        : true,    // sets the context imageSmoothingEnabled flag
+			scrollOffset	 : 0,
+			scrollMarker	 : null
 		}
 
 		this.config = {...defaults, ...opts}
@@ -98,7 +100,7 @@ class S{
 		const _down = context.hasTouch ? 'touchstart' : 'mousedown'
 		const _up   = context.hasTouch ? 'touchend'   : 'mouseup'
 
-		if(this.config.scrollMarker) {
+		if(this.config.scrollMarker != null) {
 			_window.addEventListener('scroll', scrollMove.bind(null, this))
 		}
 
@@ -351,11 +353,9 @@ function scrollMove(self, e) {
 	const r = self.config.hiDPI ? _window.devicePixelRatio : 1;
 
 	let w = self.ctx.canvas.height / r;
-	let m = self.config.scrollMarker ? self.config.scrollMarker.getBoundingClientRect().top  :  self.ctx.canvas.getBoundingClientRect().top;
-
-	if(self.config.scrollOffset) {
-		m = m + self.config.scrollOffset
-	}
+	let m = w - (self.config.scrollMarker ? self.config.scrollMarker.getBoundingClientRect().top  :  self.ctx.canvas.getBoundingClientRect().top) - 1;
+	m = m + self.config.scrollOffset
+	
 
 	const id = constrain(Math.floor(m / w * t), 0, t - 1);
 	if (id != self.current) {
