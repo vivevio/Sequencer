@@ -184,6 +184,10 @@ class S{
 		const _down = context.hasTouch ? 'touchstart' : 'mousedown';
 		const _up   = context.hasTouch ? 'touchend'   : 'mouseup';
 
+		if(this.config.scrollMarker) {
+			_window.addEventListener('scroll', scrollMove.bind(null, this));
+		}
+
 		if (this.config.playMode === 'hover') {
 
 			if(this.config.hoverElement) {
@@ -425,6 +429,29 @@ function absoluteMove(self, e) {
 
 	// remove bounce on mobile
 	e.preventDefault();
+}
+
+function scrollMove(self, e) {
+
+	const t = self.images.length;
+	const r = self.config.hiDPI ? _window.devicePixelRatio : 1;
+
+	let w = self.ctx.canvas.height / r;
+	let m = self.config.scrollMarker ? self.config.scrollMarker.getBoundingClientRect().top  :  self.ctx.canvas.getBoundingClientRect().top;
+
+	if(self.config.scrollOffset) {
+		m = m + self.config.scrollOffset;
+	}
+
+	const id = constrain(Math.floor(m / w * t), 0, t - 1);
+	if (id != self.current) {
+		self.drawImage(id);
+		self.current = id;
+	}
+
+	// remove bounce on mobile
+	e.preventDefault();
+
 }
 
 // TODO: break out in own module
