@@ -50,8 +50,7 @@
 	</head>
 	<body id="body">
         <div class="section"></div>
-        <div class="section"></div>
-        <div class="app"><canvas id="ctx"></div>
+        <div class="app" id="app"><canvas id="ctx"></div>
         <div class="section"></div>
         <div class="section"></div>
 
@@ -83,16 +82,18 @@
 		].map( e => {return 'pics/pig/' + e})
 
 		const configs = {
-			list             : list,
+			from             : 'lion3/lactiger_0000.png',
+			to               : 'lion3/lactiger_0151.png',
+			// list             : list,
 			playMode         : 'hover',
 			direction        : '-x',
             scrollMarker     : document.getElementById('ctx'),
 		}
 
 		configs.canvas = document.getElementById('ctx');
-        configs.canvas.width  = 200;
-        configs.canvas.height = 150;
-        
+        configs.canvas.width  = 400;
+        configs.canvas.height = 648.33;
+
 
         const s = Sequencer.make(configs, window);
 

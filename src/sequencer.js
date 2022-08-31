@@ -355,7 +355,6 @@ function scrollMove(self, e) {
 	let w = self.ctx.canvas.height / r;
 	let m = w - (self.config.scrollMarker ? self.config.scrollMarker.getBoundingClientRect().top  :  self.ctx.canvas.getBoundingClientRect().top) - 1;
 	m = m + self.config.scrollOffset
-	
 
 	const id = constrain(Math.floor(m / w * t), 0, t - 1);
 	if (id != self.current) {
